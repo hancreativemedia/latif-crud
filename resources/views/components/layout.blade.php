@@ -71,6 +71,22 @@
         @endif
 
 
+        // convert title to slug 
+        document.getElementById('title').addEventListener('input', 
+        function () {
+            const titleInput = document.getElementById('title').value;
+            const slugInput = document.getElementById('slug');
+            
+            // replace pertama menghilangkan space pada titleinput menjadi '-'
+            // replace kedua menghilangkan non-alpanumerik
+            const slug = titleInput
+                        .toLowerCase()
+                        .replace(/\s+/g, '-')
+                        .replace(/[^\w-]+/g, '');
+
+            slugInput.value = slug;
+        });
+
     </script>
 </body>
 </html>

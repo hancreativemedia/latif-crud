@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +23,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create', ['title' => 'Create']);
+        $category = Category::all();
+        return view('products.create', ['title' => 'Create', 'category' => $category]);
     }
 
     /**
@@ -36,6 +38,7 @@ class ProductController extends Controller
             'slug' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
+            'category_id' => 'required',
             'image' => 'required|image|mimes: jpeg,jpg,png|max:1024|dimensions:max_width:1980,max_height:1500',
         ]);
 
@@ -50,6 +53,7 @@ class ProductController extends Controller
             'slug' => $request->slug,
             'price' => $request->price,
             'description' => $request->description,
+            'category_id' => $request->category_id,
             'image' => $imageName,
         ]);
 

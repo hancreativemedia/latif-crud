@@ -54,7 +54,7 @@
                 </tr>
                 @empty
                 <tr class="">
-                    <p class="font-semibold my-4 text-xl"><span class="font-normal text-blue-600 italic">"{{ htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES) }}"</span> Article not found!</p>  
+                    <p class="font-semibold my-4 text-xl"><span class="font-normal text-blue-600 italic">"{{ htmlspecialchars($_GET['search'] ?? '', ENT_QUOTES) }}"</span> Product not found!</p>  
                     <a href="/product" class=" text-blue-600 hover:underline my-4">&laquo; Back to product</a>  
                 </tr>                    
                 @endforelse

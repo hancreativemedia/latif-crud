@@ -19,6 +19,7 @@ class Product extends Model
         'description',
         'price',
         'image',
+        'category_id'
     ];
 
     public function getRouteKeyName()
