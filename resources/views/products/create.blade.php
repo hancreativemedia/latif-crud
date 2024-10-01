@@ -21,7 +21,7 @@
                 <!-- Slug -->
                 <div class="mb-3">
                     <label for="slug" class="block text-gray-700 text-sm font-bold mb-2">Slug</label>
-                    <input type="text" name="slug" id="slug" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('slug') }}">
+                    <input type="text" name="slug" id="slug" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" readonly value="{{ old('slug') }}">
                     @error('slug')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
@@ -49,14 +49,14 @@
 
                 <!-- category -->
                 <div class="mb-3">
-                    <label for="category_id" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-                    <select name="category_id" id="">
+                    <label for="categories" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                    <select name="categories[]" id="">
                         <option value="" selected disabled>- Select Category -</option>
-                        @foreach ($category as $cat)
-                        <option {{ old('category_id') == $cat->id ? 'selected' : ''}} value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @foreach ($categories as $category)
+                        <option  value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('categories')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>

@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer utilities {
+  /* Scrollbar Track */
+  .scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Scrollbar Thumb (Handle) */
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4A5568; /* Gunakan warna hitam-abu */
+    border-radius: 10px; /* Buat bulat atau bisa disesuaikan */
+    border: 2px solid transparent;
+  }
+
+}

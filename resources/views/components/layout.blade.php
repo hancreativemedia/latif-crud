@@ -7,21 +7,22 @@
     <title>Laravel</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
 
     {{-- Scripts --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans antialiased">
-    <div class="flex min-h-screen bg-gray-100">
+<body class="font-sans bg-zinc-100">
+    <div class="md:flex flex-row bg-gray-100">
 
 
         <x-navbar></x-navbar>
     
         <!-- Main Content Area -->
-        <div class="flex-1 p-8">
+        <div class="flex-1 p-8 md:ml-56 ml-0">
             {{ $slot }}
         </div>
     </div>

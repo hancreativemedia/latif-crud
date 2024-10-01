@@ -13,11 +13,19 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans]
             },
             colors: {
-                primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
-            }
+                primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"},
+                'secondary': "87A2FF"
+            },
+            backgroundImage: {
+                'search-pattern': "url('products/2024-08-14-Codigo_php.jpg')",
+            },
+            boxShadow: {
+                'hover': '0 2px 10px 0 rgb(0 0 0 / 0.05)',
+                'active': 'inset -10px 0 10px rgba(0 0 0 / 0.05)',
+              }
         },
         fontFamily: {
             'body': [
@@ -59,6 +67,7 @@ export default {
 
     plugins: [
         require('@tailwindcss/forms'),
-        require('flowbite/plugin')
+        require('flowbite/plugin'),
+        require('tailwind-scrollbar'),
     ],
 };

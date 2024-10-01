@@ -22,17 +22,19 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
         ]);
 
+        Category::factory(15)->create();
+
         Category::create([
-            'name' => 'PHP',
-            'slug' => 'php'
+            'name' => 'Pria',
+            'slug' => 'pria'
         ]);
         Category::create([
-            'name' => 'JavaScript',
-            'slug' => 'javacript'
+            'name' => 'Wanita',
+            'slug' => 'wanita'
         ]);
         Category::create([
-            'name' => 'Python',
-            'slug' => 'python'
+            'name' => 'Dalaman Pria',
+            'slug' => 'dalaman-pria'
         ]);
     }
 }

@@ -1,4 +1,6 @@
 <x-layout>
+    {{-- @dd($product); --}}
+
     <div class="pb-3">
         <h1 class="font-bold text-4xl "><a href="/product" class=" hover:underline">Products </a>><span class="hover:underline text-blue-500">{{ $title }}</span> > {{ $product->title }}</h1>
     </div>
@@ -44,6 +46,21 @@
                     <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price</label>
                     <input type="number" name="price" id="price" step="0.01" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('price', $product->price) }}">
                     @error('price')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- category -->
+                <div class="mb-3">
+                    <label for="categories" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                    <select name="categories[]" id="">
+                        <option value="" selected disabled>- Select Category -</option>
+                        @foreach ($categories as $category)
+                            <option @if($product->categories->contains($category->id)) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                        
+                    </select>
+                    @error('cetagories[]')
                         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                     @enderror
                 </div>

@@ -14,8 +14,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::filter(request(['search']))->latest()->paginate(10)->withQueryString();
-        return view('products.index', ['title' => 'Products', 'products' => $products]);
+        // Filter pencarian dan category
+        $categorySlug = request('category');
+        $products = Product::filter(request(['search']))->filterByCategory($categorySlug)->latest()->paginate(9)->withQueryString();
+
+        return view('products.index', [
+            'title' => 'Products',
+            'products' => $products,
+            'categories' => Category::all(), // untuk dropdown filter kategori
+            'selectedCategory' => $categorySlug
+        ]);
     }
 
     /**
@@ -23,8 +31,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
-        return view('products.create', ['title' => 'Create', 'category' => $category]);
+        $categories = Category::all();
+        return view('products.create', ['title' => 'Create', 'categories' => $categories]);
     }
 
     /**
@@ -38,8 +46,7 @@ class ProductController extends Controller
             'slug' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
-            'category_id' => 'required',
-            'image' => 'required|image|mimes: jpeg,jpg,png|max:1024|dimensions:max_width:1980,max_height:1500',
+            'image' => 'required|image|mimes: jpeg,jpg,png|max:5024|dimensions:max_width:1980,max_height:1500',
         ]);
 
         // upload image
@@ -48,15 +55,15 @@ class ProductController extends Controller
         $image->storeAs('public/products', $imageName);
 
         // create data
-        Product::create([
+        $product = Product::create([
             'title' => $request->title,
             'slug' => $request->slug,
             'price' => $request->price,
             'description' => $request->description,
-            'category_id' => $request->category_id,
             'image' => $imageName,
         ]);
 
+        $product->categories()->attach($request->categories);
         // redirect halaman product
         return redirect()->route('product.index')->with('success', 'Product created successfully');
         
@@ -67,6 +74,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        return view('products.show', ['title' => $product->title, 'product' => $product]);   
+    }
+
+    public function detailProduct(Product $product)
+    {
+        // dd($product);
         return view('products.detail', ['title' => $product->title, 'product' => $product]);   
     }
 
@@ -75,7 +88,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', ['title' => 'Edit', 'product' => $product]);
+        $categories = Category::all();
+        return view('products.edit', ['title' => 'Edit', 'product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -108,6 +122,7 @@ class ProductController extends Controller
                 'description' => $request->description,
                 'image' => $imageName,
             ]);
+            $product->categories()->attach($request->categories);
         } else {
             // jika tidak diubah image
             $product->update([
@@ -116,6 +131,7 @@ class ProductController extends Controller
                 'price' => $request->price,
                 'description' => $request->description,
             ]);
+            $product->categories()->attach($request->categories);
         }
         
 
